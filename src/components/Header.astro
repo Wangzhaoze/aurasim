@@ -29,6 +29,7 @@ interface Props {
 
 const { title, authors, conference, notes, links } = Astro.props;
 const hasBackground = Astro.slots.has("background");
+const hasTitleSlot = Astro.slots.has("title");
 ---
 
 <header class:list={["full-bleed relative mb-12", hasBackground && "-mt-16 pt-24 pb-28"]}>
@@ -42,7 +43,9 @@ const hasBackground = Astro.slots.has("background");
     "relative z-10 mx-auto flex max-w-[90rem] flex-col items-center px-8 text-center",
     hasBackground ? "gap-10 text-white prose-headings:text-white [text-shadow:0_0_8px_rgba(0,0,0,0.6)]" : "gap-6",
   ]}>
-    <h1 class="my-0 max-w-[80rem] text-5xl font-medium leading-tight">{title}</h1>
+    <h1 class="my-0 max-w-[80rem] text-5xl font-medium leading-tight">
+      {hasTitleSlot ? <slot name="title" /> : title}
+    </h1>
 
     <div class="grid w-full max-w-[50rem] grid-cols-8 items-start justify-items-center gap-x-2 gap-y-4 max-md:grid-cols-2">
       {authors.map((author, index) => (
