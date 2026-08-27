@@ -35,6 +35,24 @@ import dogsDiffc from "./assets/dogs-diffc.png"
 import dogsTrue from "./assets/dogs-true.png"
 import dogsMsillm from "@/assets/dogs-msillm.jpg"
 
+import cover from "./assets/cover/cover.png";
+
+import pedestriansScenario from "./assets/videos/demo_parking_lot_two_pedestrians_scenario.mp4";
+import pedestriansRdmap from "./assets/videos/demo_parking_lot_two_pedestrians_rdmap.mp4";
+import pedestriansMicroDoppler from "./assets/videos/demo_parking_lot_two_pedestrians_micro_doppler.mp4";
+import carsScenario from "./assets/videos/demo_parking_lot_three_cars_approaching_scenario.mp4";
+import carsRdmap from "./assets/videos/demo_parking_lot_three_cars_approaching_rdmap.mp4";
+import carsMicroDoppler from "./assets/videos/demo_parking_lot_three_cars_approaching_micro_doppler.mp4";
+
+import dtReal1 from "./assets/comparisons/dt_real_1.png";
+import dtSim1 from "./assets/comparisons/dt_sim_1.png";
+import dtReal2 from "./assets/comparisons/dt_real_2.png";
+import dtSim2 from "./assets/comparisons/dt_sim_2.png";
+import dtReal3 from "./assets/comparisons/dt_real_3.png";
+import dtSim3 from "./assets/comparisons/dt_sim_3.png";
+import dtReal4 from "./assets/comparisons/dt_real_4.png";
+import dtSim4 from "./assets/comparisons/dt_sim_4.png";
+
 <Header
   title="Academic Project Page Template"
   conference="Conference Name"
@@ -87,15 +105,7 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
     { name: "Slides", url: "https://github.com/RomanHauksson/academic-project-astro-template", icon: "ri:slideshow-2-line" },
   ]}
 >
-  {/*
-    Optionally place a cover image or video behind the header. Import the
-    asset (from src/assets/, so images are optimized) and pass it through the
-    "background" slot using the Picture or Video component:
-
-      <Picture slot="background" src={cover} alt="" />
-      <Video slot="background" src={outside} controls={false} />
-  */}
-  <Picture slot="background" src={dogsTrue} alt="" priority />
+  <Picture slot="background" src={cover} alt="" priority />
 </Header>
 
 <HighlightedSection>
@@ -116,7 +126,39 @@ Use the `Picture` component to display images. If you have a figure in PDF forma
 
 ### Video
 
-<Video src={outside} />
+#### Parking Lot — Two Pedestrians
+
+<div class="grid gap-4 md:grid-cols-3">
+  <div>
+    <p class="mb-2 text-center font-medium">Scenario</p>
+    <Video src={pedestriansScenario} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
+    <Video src={pedestriansRdmap} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
+    <Video src={pedestriansMicroDoppler} />
+  </div>
+</div>
+
+#### Parking Lot — Three Cars Approaching
+
+<div class="grid gap-4 md:grid-cols-3">
+  <div>
+    <p class="mb-2 text-center font-medium">Scenario</p>
+    <Video src={carsScenario} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
+    <Video src={carsRdmap} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
+    <Video src={carsMicroDoppler} />
+  </div>
+</div>
 
 ### Wide visual
 
@@ -137,12 +179,32 @@ Wrap a visual in a `Figure` component to add a caption.
 
 ### Comparison slider
 
-Use the `Comparison` component to compare two visuals with an interactive slider.
-
-<Comparison client:idle >
-  <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Picture slot="itemTwo" src={dogsTrue} alt="True photo of two running dogs side-by-side in shallow water" />
-</Comparison>
+<div class="grid gap-5 md:grid-cols-2">
+  <div>
+    <Comparison client:idle>
+      <Picture slot="itemOne" src={dtReal1} alt="Real scene for digital twin comparison 1" />
+      <Picture slot="itemTwo" src={dtSim1} alt="Simulated digital twin scene 1" />
+    </Comparison>
+  </div>
+  <div>
+    <Comparison client:idle>
+      <Picture slot="itemOne" src={dtReal2} alt="Real scene for digital twin comparison 2" />
+      <Picture slot="itemTwo" src={dtSim2} alt="Simulated digital twin scene 2" />
+    </Comparison>
+  </div>
+  <div>
+    <Comparison client:idle>
+      <Picture slot="itemOne" src={dtReal3} alt="Real scene for digital twin comparison 3" />
+      <Picture slot="itemTwo" src={dtSim3} alt="Simulated digital twin scene 3" />
+    </Comparison>
+  </div>
+  <div>
+    <Comparison client:idle>
+      <Picture slot="itemOne" src={dtReal4} alt="Real scene for digital twin comparison 4" />
+      <Picture slot="itemTwo" src={dtSim4} alt="Simulated digital twin scene 4" />
+    </Comparison>
+  </div>
+</div>
 
 ### Tab panels
 
@@ -236,7 +298,7 @@ Displaying the BibTeX entry for your paper in a code block makes it easy to copy
   author = "{Roman Hauksson}",
   title = "Academic Project Page Template",
   year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+  howpublished = "\\url{https://research-template.roman.technology}",
 }
 ```
 
