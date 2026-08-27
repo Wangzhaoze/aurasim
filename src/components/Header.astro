@@ -44,10 +44,18 @@ const hasBackground = Astro.slots.has("background");
   ]}>
     <h1 class="my-0 max-w-[80rem] text-5xl font-medium leading-tight">{title}</h1>
 
-    <div class="grid w-full max-w-[64rem] grid-cols-4 justify-items-center gap-x-7 gap-y-4 max-md:grid-cols-2">
+    <div class="grid w-full max-w-[68rem] grid-cols-8 items-start justify-items-center gap-x-3 gap-y-4 max-md:grid-cols-2">
       {authors.map((author, index) => (
-        <div class:list={["flex flex-col items-center text-center", index === 4 && "md:col-start-1 md:ml-[50%]", index === 5 && "md:ml-[50%]", index === 6 && "md:ml-[50%]"]}>
-          <div class="flex flex-row text-xl">
+        <div
+          class:list={[
+            "flex min-w-0 flex-col items-center text-center max-md:col-span-1",
+            index < 4 && "md:col-span-2",
+            index === 4 && "md:col-span-2 md:col-start-2",
+            index === 5 && "md:col-span-2 md:col-start-4",
+            index === 6 && "md:col-span-2 md:col-start-6",
+          ]}
+        >
+          <div class="flex flex-row whitespace-nowrap text-xl">
             {author.url ? (
               <a class:list={[hasBackground && "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"]} href={author.url}>{author.name}</a>
             ) : author.name}
