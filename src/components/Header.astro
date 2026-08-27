@@ -83,13 +83,12 @@ const hasBackground = Astro.slots.has("background");
     {conference && <div>{conference}</div>}
     {
       notes && (
-        <div class="text-center text-sm">
+        <div class="flex flex-col items-center gap-1 text-center text-sm">
           {
-            // prettier-ignore
-            notes.map((note, index, array) => (
-              <span>
-                <sup>{note.symbol}</sup>{note.text}{index < array.length - 1 ? "," : ""}
-              </span>
+            notes.map((note) => (
+              <div>
+                <sup>{note.symbol}</sup>{note.text}
+              </div>
             ))
           }
         </div>
