@@ -7,10 +7,14 @@ const { src, alt } = Astro.props;
 ---
 
 <model-viewer
-  class="my-6 block w-full aspect-video min-h-[28rem] overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-800"
+  class="my-6 block w-full aspect-[4/3] min-h-[36rem] overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-800"
   alt={alt}
   src={src}
-  camera-controls></model-viewer>
+  camera-controls
+  min-camera-orbit="auto auto 0.05m"
+  max-camera-orbit="auto auto 10000m"
+  interaction-prompt="auto"
+></model-viewer>
 <script>
   import "@google/model-viewer";
 </script>
