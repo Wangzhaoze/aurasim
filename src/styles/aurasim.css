@@ -1,0 +1,18 @@
+:root {
+  --maximum-text-width: 100rem;
+}
+
+body.prose {
+  font-size: 1.25rem;
+  line-height: 1.8;
+}
+
+footer {
+  max-width: 100rem !important;
+}
+
+@media (max-width: 768px) {
+  body.prose {
+    font-size: 1.075rem;
+  }
+}
