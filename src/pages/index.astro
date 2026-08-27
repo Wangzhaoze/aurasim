@@ -1,12 +1,9 @@
 ---
 import { Font } from "astro:assets";
-
 import Table from "../components/Table.astro";
-
 import "../styles/global.css";
 import "../styles/aurasim.css";
 import "katex/dist/katex-swap.css";
-
 import { Content, frontmatter } from "../paper.mdx";
 
 interface Frontmatter {
@@ -17,14 +14,7 @@ interface Frontmatter {
   theme?: "device" | "light" | "dark";
 }
 
-const {
-  title,
-  description,
-  favicon,
-  thumbnail,
-  theme = "device",
-} = frontmatter as Frontmatter;
-
+const { title, description, favicon, thumbnail, theme = "device" } = frontmatter as Frontmatter;
 const baseUrl = import.meta.env.BASE_URL;
 const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
 ---
@@ -36,34 +26,38 @@ const prefix = baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     {description && <meta name="description" content={description} />}
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-
     <link rel="icon" type="image/svg+xml" href={prefix + favicon} />
-
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="website" />
     {thumbnail && <meta property="og:image" content={prefix + thumbnail} />}
-
-    <Font
-      cssVariable="--font-noto-sans"
-      preload={[{ subset: "latin", style: "normal" }]}
-    />
-
+    <Font cssVariable="--font-noto-sans" preload={[{ subset: "latin", style: "normal" }]} />
     <title>{title}</title>
+    <script is:inline>
+      const savedTheme = localStorage.getItem('aurasim-theme');
+      if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
+    </script>
   </head>
-  <body
-    class="prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-600 prose-a:hover:text-blue-900 prose-a:dark:text-blue-200 prose-a:dark:hover:text-blue-100 prose-a:underline prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:hover:decoration-solid prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none max-w-none pt-16 pb-6 font-(family-name:--font-noto-sans)"
-  >
-    <main>
-      <Content components={{ table: Table }} />
-    </main>
+  <body class="prose prose-lg prose-zinc dark:prose-invert prose-a:text-blue-600 prose-a:hover:text-blue-900 prose-a:dark:text-blue-200 prose-a:dark:hover:text-blue-100 prose-a:underline prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:hover:decoration-solid prose-a:font-normal prose-code:bg-zinc-200 prose-code:dark:bg-zinc-800 prose-code:text-zinc-800 prose-code:dark:text-zinc-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-medium prose-code:before:content-none prose-code:after:content-none max-w-none pt-16 pb-6 font-(family-name:--font-noto-sans)">
+    <button id="theme-toggle" type="button" aria-label="Toggle light and dark mode" title="Toggle light / dark mode" class="not-prose fixed right-5 top-5 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-300 bg-white/90 text-xl shadow-lg backdrop-blur transition hover:scale-105 dark:border-zinc-700 dark:bg-zinc-900/90">
+      <span id="theme-icon" aria-hidden="true">☾</span>
+    </button>
+    <main><Content components={{ table: Table }} /></main>
     <footer class="mx-auto max-w-[50rem] px-6 text-center">
-      <p class="prose-sm text-center">
-        Built with <a
-          href="https://research-template.roman.technology"
-          rel="nofollow">Roman Hauksson-Neill's project page template</a
-        >
-      </p>
+      <p class="prose-sm text-center">Built with <a href="https://research-template.roman.technology" rel="nofollow">Roman Hauksson-Neill's project page template</a></p>
     </footer>
+    <script is:inline>
+      const root = document.documentElement;
+      const button = document.getElementById('theme-toggle');
+      const icon = document.getElementById('theme-icon');
+      const resolvedDark = () => root.dataset.theme === 'dark' || (root.dataset.theme === 'device' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const refreshIcon = () => { if (icon) icon.textContent = resolvedDark() ? '☀' : '☾'; };
+      refreshIcon();
+      button?.addEventListener('click', () => {
+        root.dataset.theme = resolvedDark() ? 'light' : 'dark';
+        localStorage.setItem('aurasim-theme', root.dataset.theme);
+        refreshIcon();
+      });
+    </script>
   </body>
 </html>
