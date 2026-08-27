@@ -2,7 +2,7 @@
 # This title is used for the browser tab and the link-preview card (see the
 # "description" and "thumbnail" keys below). The title displayed at the top of
 # the page is set separately, on the <Header> component in the body.
-title: Academic Project Page Template
+title: AuRaSim: A Ray-Tracing-Based Digital-Twin Framework for Automotive FMCW Radar Simulation
 
 # The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system). Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
 theme: device
@@ -54,7 +54,7 @@ import dtReal4 from "./assets/comparisons/dt_real_4.png";
 import dtSim4 from "./assets/comparisons/dt_sim_4.png";
 
 <Header
-  title="Academic Project Page Template"
+  title="AuRaSim: A Ray-Tracing-Based Digital-Twin Framework for Automotive FMCW Radar Simulation"
   conference="Conference Name"
   authors={[
     {
@@ -118,11 +118,13 @@ This is a template you can use to create a professional-looking, accessible, and
 
 ## Visuals
 
+{/*
 ### Image
 
 Use the `Picture` component to display images. If you have a figure in PDF format, you can pass in its path as the `src` prop and it will be converted into a web-friendly image automatically.
 
 <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+*/}
 
 ### Video
 
@@ -160,6 +162,7 @@ Use the `Picture` component to display images. If you have a figure in PDF forma
   </div>
 </div>
 
+{/*
 ### Wide visual
 
 I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
@@ -167,7 +170,9 @@ I constrained the maximum width of the text column to make sure it's readable ev
 <Wide>
   <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
 </Wide>
+*/}
 
+{/*
 ### Figure with caption
 
 Wrap a visual in a `Figure` component to add a caption.
@@ -176,6 +181,7 @@ Wrap a visual in a `Figure` component to add a caption.
   <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
   <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
 </Figure>
+*/}
 
 ### Comparison slider
 
@@ -236,6 +242,7 @@ Tab panels are a great way to display a labeled collection of related visuals wi
   </TabsContent>
 </Tabs>
 
+{/*
 ### Carousel
 
 A carousel is another useful pattern for a collection of visuals that don't necessarily have meaningful labels.
@@ -254,6 +261,7 @@ A carousel is another useful pattern for a collection of visuals that don't nece
     />
   </CarouselSlide>
 </Carousel>
+*/}
 
 ## Two columns
 
