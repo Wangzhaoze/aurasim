@@ -47,17 +47,9 @@ const hasTitleSlot = Astro.slots.has("title");
       {hasTitleSlot ? <slot name="title" /> : title}
     </h1>
 
-    <div class="grid w-full max-w-[50rem] grid-cols-8 items-start justify-items-center gap-x-2 gap-y-4 max-md:grid-cols-2">
-      {authors.map((author, index) => (
-        <div
-          class:list={[
-            "flex min-w-0 flex-col items-center text-center max-md:col-span-1",
-            index < 4 && "md:col-span-2",
-            index === 4 && "md:col-span-2 md:col-start-2",
-            index === 5 && "md:col-span-2 md:col-start-4",
-            index === 6 && "md:col-span-2 md:col-start-6",
-          ]}
-        >
+    <div class="grid w-full max-w-[64rem] grid-cols-2 items-start justify-items-center gap-x-6 gap-y-4 md:grid-cols-4">
+      {authors.map((author) => (
+        <div class="flex min-w-0 flex-col items-center text-center">
           <div class="flex flex-row whitespace-nowrap text-xl">
             {author.url ? (
               <a class:list={[hasBackground && "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"]} href={author.url}>{author.name}</a>
