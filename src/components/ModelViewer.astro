@@ -4,24 +4,66 @@ interface Props {
   alt?: string;
 }
 const { src, alt } = Astro.props;
+
+// The ray-tracing demo is currently exported as two sibling GLBs. Keep the
+// existing page API unchanged and automatically show demo 2 when demo 1 is
+// passed in. Other ModelViewer usages continue to render a single model.
+const secondarySrc = src.endsWith("_1.glb")
+  ? src.replace(/_1\.glb$/, "_2.glb")
+  : undefined;
 ---
 
-<div class="viewer-wrap relative my-6">
-  <model-viewer
-    class="block w-full aspect-[4/3] min-h-[36rem] overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-800"
-    alt={alt}
-    src={src}
-    camera-controls
-    disable-zoom
-    field-of-view="45deg"
-    min-camera-orbit="auto auto 0.10m"
-    max-camera-orbit="auto auto 10000m"
-    interaction-prompt="auto"
-    touch-action="pan-y"
-  ></model-viewer>
-  <div class="pointer-events-none absolute bottom-3 right-3 rounded-md bg-black/55 px-2.5 py-1.5 text-xs text-white backdrop-blur-sm">
-    Double-click to focus · Wheel to dolly
+<div class="space-y-8">
+  <div>
+    {secondarySrc && (
+      <p class="mb-2 text-center text-sm font-medium text-zinc-600 dark:text-zinc-300">
+        Ray-Tracing Demo 1
+      </p>
+    )}
+    <div class="viewer-wrap relative my-6">
+      <model-viewer
+        class="block w-full aspect-[4/3] min-h-[36rem] overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-800"
+        alt={alt}
+        src={src}
+        camera-controls
+        disable-zoom
+        field-of-view="45deg"
+        min-camera-orbit="auto auto 0.10m"
+        max-camera-orbit="auto auto 10000m"
+        interaction-prompt="auto"
+        touch-action="pan-y"
+      ></model-viewer>
+      <div class="pointer-events-none absolute bottom-3 right-3 rounded-md bg-black/55 px-2.5 py-1.5 text-xs text-white backdrop-blur-sm">
+        Double-click to focus · Wheel to dolly
+      </div>
+    </div>
   </div>
+
+  {secondarySrc && (
+    <div>
+      <p class="mb-2 text-center text-sm font-medium text-zinc-600 dark:text-zinc-300">
+        Ray-Tracing Demo 2
+      </p>
+      <div class="viewer-wrap relative my-6">
+        <model-viewer
+          class="block w-full aspect-[4/3] min-h-[36rem] overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-800"
+          alt="Interactive AuRaSim ray-tracing scene 2"
+          src={secondarySrc}
+          camera-controls
+          disable-zoom
+          field-of-view="45deg"
+          min-camera-orbit="auto auto 0.10m"
+          max-camera-orbit="auto auto 10000m"
+          interaction-prompt="auto"
+          touch-action="pan-y"
+          loading="lazy"
+        ></model-viewer>
+        <div class="pointer-events-none absolute bottom-3 right-3 rounded-md bg-black/55 px-2.5 py-1.5 text-xs text-white backdrop-blur-sm">
+          Double-click to focus · Wheel to dolly
+        </div>
+      </div>
+    </div>
+  )}
 </div>
 
 <script>
