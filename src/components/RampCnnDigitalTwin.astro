@@ -1,0 +1,44 @@
+---
+import Video from "./Video.astro";
+
+import bmsCam from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_bms1000_cam.mp4";
+import bmsReal from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_bms1000_real.mp4";
+import bmsSim from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_bms1000_sim.mp4";
+import pmsCam from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_pms2000_cam.mp4";
+import pmsReal from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_pms2000_real.mp4";
+import pmsSim from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_pms2000_sim.mp4";
+---
+
+<div class="my-6 grid gap-x-4 gap-y-6 md:grid-cols-3">
+  <div>
+    <p class="mb-2 text-center font-medium">Camera</p>
+    <Video src={bmsCam} />
+    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">BMS1000</p>
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Real Radar</p>
+    <Video src={bmsReal} />
+    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">BMS1000</p>
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Sim Radar</p>
+    <Video src={bmsSim} />
+    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">BMS1000</p>
+  </div>
+
+  <div>
+    <p class="mb-2 text-center font-medium">Camera</p>
+    <Video src={pmsCam} />
+    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">PMS2000</p>
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Real Radar</p>
+    <Video src={pmsReal} />
+    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">PMS2000</p>
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Sim Radar</p>
+    <Video src={pmsSim} />
+    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">PMS2000</p>
+  </div>
+</div>
