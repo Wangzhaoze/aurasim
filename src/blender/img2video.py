@@ -11,7 +11,7 @@ from tqdm import tqdm, trange
 # ============================================================
 
 # 图片所在文件夹
-INPUT_DIR = r"D:/Datasets/RAMPCNN/2019_04_09_pms2000/images_0"
+INPUT_DIR = r"D:/Projects/RadarDigitalTwinSimulator/tmp/paper_placeholders/subfigure_assets/all_frames_shared_normalized_with_axes/pms2000_real"
 
 # 输出文件路径
 # 改成 .mp4 就输出 MP4
