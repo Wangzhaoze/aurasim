@@ -22,14 +22,13 @@ import SmallCaps from "./components/SmallCaps.astro";
 import Figure from "./components/Figure.astro";
 import Picture from "./components/Picture.astro";
 import ModelViewer from "./components/ModelViewer.astro"
-import RampCnnDigitalTwin from "./components/RampCnnDigitalTwin.astro";
+import RampCnnDigitalTwinFrames from "./components/RampCnnDigitalTwinFrames.tsx";
+import RampCnnSim2RealFrames from "./components/RampCnnSim2RealFrames.tsx";
 import TwoColumns from "./components/TwoColumns.astro";
 import YouTubeVideo from "./components/YouTubeVideo.astro";
 import Carousel from "./components/Carousel.astro";
 import CarouselSlide from "./components/CarouselSlide.astro";
 import Wide from "./components/Wide.astro";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/starwind/tabs";
-import { Comparison } from "./components/Comparison.tsx";
 
 import outside from "./assets/outside.mp4";
 import dogsDiffc from "./assets/dogs-diffc.png"
@@ -44,15 +43,6 @@ import pedestriansMicroDoppler from "./assets/videos/demo/demo_parking_lot_ti184
 import carsScenario from "./assets/videos/demo/demo_parking_lot_ti1843_static_car_approaching_3tx4rx_20hz_5s_scenario.mp4";
 import carsRdmap from "./assets/videos/demo/demo_parking_lot_ti1843_static_car_approaching_3tx4rx_20hz_5s_rdmaps.mp4";
 import carsMicroDoppler from "./assets/videos/demo/demo_parking_lot_ti1843_static_car_approaching_3tx4rx_20hz_5s_micro_doppler.mp4";
-
-import dtReal1 from "./assets/comparisons/dt_real_1.png";
-import dtSim1 from "./assets/comparisons/dt_sim_1.png";
-import dtReal2 from "./assets/comparisons/dt_real_2.png";
-import dtSim2 from "./assets/comparisons/dt_sim_2.png";
-import dtReal3 from "./assets/comparisons/dt_real_3.png";
-import dtSim3 from "./assets/comparisons/dt_sim_3.png";
-import dtReal4 from "./assets/comparisons/dt_real_4.png";
-import dtSim4 from "./assets/comparisons/dt_sim_4.png";
 
 <Header
   title="AuRaSim: A Ray-Tracing-Based Automotive Radar Simulator for Dynamic Digital-Twin Scenarios"
@@ -95,32 +85,9 @@ This is a template you can use to create a professional-looking, accessible, and
 
 ### Digital Twin Scenarios
 
-<div class="grid gap-5 md:grid-cols-2">
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal1} alt="Real scene for digital twin comparison 1" />
-      <Picture slot="itemTwo" src={dtSim1} alt="Simulated digital twin scene 1" />
-    </Comparison>
-  </div>
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal2} alt="Real scene for digital twin comparison 2" />
-      <Picture slot="itemTwo" src={dtSim2} alt="Simulated digital twin scene 2" />
-    </Comparison>
-  </div>
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal3} alt="Real scene for digital twin comparison 3" />
-      <Picture slot="itemTwo" src={dtSim3} alt="Simulated digital twin scene 3" />
-    </Comparison>
-  </div>
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal4} alt="Real scene for digital twin comparison 4" />
-      <Picture slot="itemTwo" src={dtSim4} alt="Simulated digital twin scene 4" />
-    </Comparison>
-  </div>
-</div>
+<Wide>
+  <RampCnnDigitalTwinFrames client:load />
+</Wide>
 
 ### Ray-Tracing
 
@@ -195,26 +162,9 @@ Wrap a visual in the `Figure` component to add a caption.
 
 ### Sim2Real
 
-#### RAMP-CNN Digital Twin
-
-<RampCnnDigitalTwin />
-
-<Tabs defaultValue="true">
-  <TabsList>
-    <TabsTrigger value="true">Ground Truth</TabsTrigger>
-    <TabsTrigger value="diffc">Simulation</TabsTrigger>
-    <TabsTrigger value="msillm">GenAI</TabsTrigger>
-  </TabsList>
-  <TabsContent value="true">
-    <Picture src={dogsTrue} alt="Ground-truth reference image" />
-  </TabsContent>
-  <TabsContent value="diffc">
-    <Picture src={dogsDiffc} alt="Simulation result" />
-  </TabsContent>
-  <TabsContent value="msillm">
-    <Picture src={dogsMsillm} alt="GenAI result" />
-  </TabsContent>
-</Tabs>
+<Wide>
+  <RampCnnSim2RealFrames client:load />
+</Wide>
 
 {/*
 ### Carousel
