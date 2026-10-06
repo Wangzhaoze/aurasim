@@ -17,6 +17,10 @@ export interface RampCnnScene {
 // so those images only need to be uploaded once.
 export const RAMP_CNN_FRAME_ROOT = "rampcnn/frames";
 
+// Use lossless PNG for the web frame sequences. Repository size is acceptable here;
+// runtime smoothness will be handled by browser caching/prefetch rather than lossy image compression.
+export const RAMP_CNN_FRAME_EXTENSION = "png";
+
 // The synchronized frame counts use the common Camera/Radar interval from the
 // current RAMP-CNN dashboard. If a newly regenerated sequence has a different
 // number of matched frames, only these three numbers need to change.
@@ -37,5 +41,5 @@ export function rampCnnFrameUrl(
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
 
-  return `${base}${RAMP_CNN_FRAME_ROOT}/${scene}/${kind}/frame_${padRampCnnFrame(frame)}.webp`;
+  return `${base}${RAMP_CNN_FRAME_ROOT}/${scene}/${kind}/frame_${padRampCnnFrame(frame)}.${RAMP_CNN_FRAME_EXTENSION}`;
 }
