@@ -166,63 +166,73 @@ Wrap a visual in the `Figure` component to add a caption.
   <RampCnnSim2RealFrames client:load />
 </Wide>
 
-{/*
-### Carousel
+## Quantitative Comparison
 
-A carousel is another useful pattern for a collection of visuals that don't necessarily have meaningful labels.
-
-<Carousel>
-  <CarouselSlide>
-    <Picture src={dogsTrue} alt="True photo of two running dogs side-by-side in shallow water" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  </CarouselSlide>
-  <CarouselSlide>
-    <Picture src={dogsMsillm} alt="Photo of two running dogs, lossily compressed using MS-ILLM" />
-  </CarouselSlide>
-</Carousel>
-*/}
-
-
-## $\LaTeX$
-
-You can also add $\LaTeX$ formulas, rendered during the build process using [$\KaTeX$](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: $a^2 + b^2 = c^2$. Or, you can write them as a block:
-
-$$
-\int_a^b f(x) dx
-$$
-
-## Citation
-
-If you copy your bibliography into `./bibliography.bib`, you can cite papers using their BibTeX keys, and they'll be automatically formatted and included in the bibliography section at the end. For example: [@vaswani2017attention]. Note that these citations are distinct from footnotes[^mynote], which show up in a separate section if you use them.
-
-[^mynote]: On the web, they should really be called "endnotes", since each page constitutes a full document.
-
-## Table
-
-Add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
-
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
-
-## BibTeX citation
-
-Displaying the BibTeX entry for your paper in a code block makes it easy to copy and paste.
-
-```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\\url{https://research-template.roman.technology}",
-}
-```
+<div class="not-prose my-6 overflow-x-auto">
+  <div class="mx-auto max-w-3xl">
+    <p class="mb-3 text-center text-sm font-semibold leading-snug text-zinc-800 dark:text-zinc-100">
+      Quantitative comparison between measured and simulated Range–Doppler maps in terms of RMSE and PSNR. ↓ denotes lower is better and ↑ denotes higher is better.
+    </p>
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr class="border-y border-zinc-500">
+          <th class="px-3 py-2 text-left font-semibold">Scenario</th>
+          <th class="px-3 py-2 text-left font-semibold">Method</th>
+          <th class="px-3 py-2 text-right font-semibold">RMSE ↓</th>
+          <th class="px-3 py-2 text-right font-semibold">PSNR [dB] ↑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowSpan={2} class="border-b border-zinc-400 px-3 py-2 font-medium align-middle">BMS1000</td>
+          <td class="px-3 py-1.5">RadarSimPy</td>
+          <td class="px-3 py-1.5 text-right">0.298</td>
+          <td class="px-3 py-1.5 text-right">11.94</td>
+        </tr>
+        <tr class="border-b border-zinc-400">
+          <td class="px-3 py-1.5 font-semibold">AuRaSim</td>
+          <td class="px-3 py-1.5 text-right font-semibold">0.172</td>
+          <td class="px-3 py-1.5 text-right font-semibold">15.27</td>
+        </tr>
+        <tr>
+          <td rowSpan={2} class="border-b border-zinc-400 px-3 py-2 font-medium align-middle">PMS2000</td>
+          <td class="px-3 py-1.5">RadarSimPy</td>
+          <td class="px-3 py-1.5 text-right">0.189</td>
+          <td class="px-3 py-1.5 text-right">15.46</td>
+        </tr>
+        <tr class="border-b border-zinc-400">
+          <td class="px-3 py-1.5 font-semibold">AuRaSim</td>
+          <td class="px-3 py-1.5 text-right font-semibold">0.159</td>
+          <td class="px-3 py-1.5 text-right font-semibold">16.11</td>
+        </tr>
+        <tr>
+          <td rowSpan={2} class="border-b border-zinc-400 px-3 py-2 font-medium align-middle">MLMS001</td>
+          <td class="px-3 py-1.5">RadarSimPy</td>
+          <td class="px-3 py-1.5 text-right">0.233</td>
+          <td class="px-3 py-1.5 text-right">12.90</td>
+        </tr>
+        <tr class="border-b border-zinc-400">
+          <td class="px-3 py-1.5 font-semibold">AuRaSim</td>
+          <td class="px-3 py-1.5 text-right font-semibold">0.111</td>
+          <td class="px-3 py-1.5 text-right font-semibold">19.40</td>
+        </tr>
+        <tr>
+          <td rowSpan={2} class="border-b border-zinc-500 px-3 py-2 font-medium align-middle">Average</td>
+          <td class="px-3 py-1.5">RadarSimPy</td>
+          <td class="px-3 py-1.5 text-right">0.240</td>
+          <td class="px-3 py-1.5 text-right">13.43</td>
+        </tr>
+        <tr class="border-b border-zinc-500">
+          <td class="px-3 py-1.5 font-semibold">AuRaSim</td>
+          <td class="px-3 py-1.5 text-right font-semibold">0.147</td>
+          <td class="px-3 py-1.5 text-right font-semibold">16.93</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 ## Bibliography
 
-[^ref]
+1. [Blender Foundation, **Blender**](https://www.blender.org/). Open-source 3D creation suite. Accessed Oct. 1, 2026.
+2. Fayçal Aït Aoudia, Jakob Hoydis, Merlin Nimier-David, Sebastian Cammerer, and Alexander Keller, [**Sionna RT: Technical Report**](https://arxiv.org/abs/2504.21719), arXiv:2504.21719, 2025.
