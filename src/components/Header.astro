@@ -47,16 +47,24 @@ const hasTitleSlot = Astro.slots.has("title");
       {hasTitleSlot ? <slot name="title" /> : title}
     </h1>
 
-    <div class="grid w-full max-w-[64rem] grid-cols-2 items-start justify-items-center gap-x-6 gap-y-4 md:grid-cols-4">
-      {authors.map((author) => (
-        <div class="flex min-w-0 flex-col items-center text-center">
-          <div class="flex flex-row whitespace-nowrap text-xl">
-            {author.url ? (
-              <a class:list={[hasBackground && "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"]} href={author.url}>{author.name}</a>
-            ) : author.name}
-            {author.notes && <sup class="text-xl">{author.notes.map((note, i, array) => note + (i < array.length - 1 ? "," : ""))}</sup>}
-          </div>
-          {author.institution && <div>{author.institution}</div>}
+    <div class="flex w-full max-w-[64rem] flex-col items-center gap-y-4">
+      {[authors.slice(0, 4), authors.slice(4)].filter((row) => row.length > 0).map((row, rowIndex) => (
+        <div class:list={[
+          "grid w-full items-start justify-items-center gap-x-6 gap-y-4",
+          rowIndex === 0 ? "grid-cols-2 md:grid-cols-4" : "grid-cols-1 sm:grid-cols-3 md:w-3/4",
+        ]}>
+          {row.map((author) => (
+            <div class="flex min-w-0 flex-col items-center text-center">
+              <div class="flex flex-row whitespace-nowrap text-xl">
+                {author.url ? (
+                  <a class:list={[hasBackground && "not-prose text-blue-200 hover:text-blue-100 underline decoration-dashed underline-offset-4 hover:decoration-solid"]} href={author.url}>{author.name}</a>
+                ) : author.name}
+                {author.notes && <sup class="text-xl">{author.notes.map((note, i, array) => note + (i < array.length - 1 ? "," : ""))}</sup>}
+              </div>
+              {author.institution && <div>{author.institution}</div>}
+            </div>
+
+          ))}
         </div>
       ))}
     </div>
