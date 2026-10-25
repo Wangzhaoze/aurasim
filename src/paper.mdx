@@ -44,12 +44,13 @@ import carsScenario from "./assets/videos/demo/demo_parking_lot_ti1843_static_ca
 import carsRdmap from "./assets/videos/demo/demo_parking_lot_ti1843_static_car_approaching_3tx4rx_20hz_5s_rdmaps.mp4";
 import carsMicroDoppler from "./assets/videos/demo/demo_parking_lot_ti1843_static_car_approaching_3tx4rx_20hz_5s_micro_doppler.mp4";
 
-import dtReal1 from "./assets/comparisons/dt_real_1.png";
-import dtSim1 from "./assets/comparisons/dt_sim_1.png";
-import dtReal2 from "./assets/comparisons/dt_real_2.png";
-import dtSim2 from "./assets/comparisons/dt_sim_2.png";
-import dtReal3 from "./assets/comparisons/dt_real_3.png";
-import dtSim3 from "./assets/comparisons/dt_sim_3.png";
+import dtReal1 from "./assets/comparisons/bms1000_real_cam.png";
+import dtSim1 from "./assets/comparisons/bms1000_sim_cam.png";
+import dtReal2 from "./assets/comparisons/pms2000_real_cam.png";
+import dtSim2 from "./assets/comparisons/pms2000_sim_cam.png";
+// Source filename says MLMS002, verify this is the intended MLMS001 real frame.
+import dtReal3 from "./assets/comparisons/mlms002_real_cam.png";
+import dtSim3 from "./assets/comparisons/mlms001_sim_cam.png";
 
 <Header
   title="AuRaSim: A Ray-Tracing-Based Automotive Radar Simulator for Dynamic Digital-Twin Scenarios"
@@ -103,6 +104,63 @@ Use the `Picture` component to display images. If you have a figure in PDF forma
 <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
 */}
 
+## Video Demonstrations
+
+#### Parking Lot — Pedestrian Approaching
+
+<div class="grid gap-4 md:grid-cols-3">
+  <div>
+    <p class="mb-2 text-center font-medium">Scenario</p>
+    <Video src={pedestriansScenario} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
+    <Video src={pedestriansRdmap} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
+    <Video src={pedestriansMicroDoppler} />
+  </div>
+</div>
+
+#### Parking Lot — Car Approaching
+
+<div class="grid gap-4 md:grid-cols-3">
+  <div>
+    <p class="mb-2 text-center font-medium">Scenario</p>
+    <Video src={carsScenario} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
+    <Video src={carsRdmap} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
+    <Video src={carsMicroDoppler} />
+  </div>
+</div>
+
+{/*
+### Wide visual
+
+I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
+
+<Wide>
+  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+</Wide>
+*/}
+
+{/*
+### Figure with caption
+
+Wrap a visual in the `Figure` component to add a caption.
+
+<Figure>
+  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
+</Figure>
+*/}
+
 ## Sim2Real
 
 ### Digital Twin Scenarios
@@ -133,7 +191,9 @@ Use the `Picture` component to display images. If you have a figure in PDF forma
 
 ### Qualitative Comparison
 
-<RampCnnDigitalTwin />
+<Wide>
+  <RampCnnDigitalTwin />
+</Wide>
 
 ### Quantitative Comparison
 
@@ -200,63 +260,6 @@ Use the `Picture` component to display images. If you have a figure in PDF forma
     </table>
   </div>
 </div>
-
-## Video Demonstrations
-
-#### Parking Lot — Pedestrian Approaching
-
-<div class="grid gap-4 md:grid-cols-3">
-  <div>
-    <p class="mb-2 text-center font-medium">Scenario</p>
-    <Video src={pedestriansScenario} />
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
-    <Video src={pedestriansRdmap} />
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
-    <Video src={pedestriansMicroDoppler} />
-  </div>
-</div>
-
-#### Parking Lot — Car Approaching
-
-<div class="grid gap-4 md:grid-cols-3">
-  <div>
-    <p class="mb-2 text-center font-medium">Scenario</p>
-    <Video src={carsScenario} />
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
-    <Video src={carsRdmap} />
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
-    <Video src={carsMicroDoppler} />
-  </div>
-</div>
-
-{/*
-### Wide visual
-
-I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
-
-<Wide>
-  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-</Wide>
-*/}
-
-{/*
-### Figure with caption
-
-Wrap a visual in the `Figure` component to add a caption.
-
-<Figure>
-  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
-</Figure>
-*/}
 
 ## Bibliography
 

@@ -1,44 +1,63 @@
 ---
 import Video from "./Video.astro";
 
-import bmsCam from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_bms1000_cam.mp4";
-import bmsReal from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_bms1000_real.mp4";
-import bmsSim from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_bms1000_sim.mp4";
-import pmsCam from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_pms2000_cam.mp4";
-import pmsReal from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_pms2000_real.mp4";
-import pmsSim from "../assets/videos/sim2real/rampcnn_parking_lot_2019_04_09_pms2000_sim.mp4";
+// Newly uploaded MP4 files are automatically discovered on each build.
+// No missing-file import can break the website build.
+const assets = import.meta.glob("../assets/videos/sim2real/*.mp4", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
+const columns = [
+  { name: "Real Camera", suffix: "_cam" },
+  { name: "Sim Camera", suffix: "_sim_cam" },
+  { name: "Real Radar", suffix: "_real" },
+  { name: "Sim Radar", suffix: "_sim" },
+] as const;
+
+const scenes = [
+  { name: "BMS1000", area: "Parking Lot", prefix: "rampcnn_parking_lot_2019_04_09_bms1000" },
+  { name: "PMS2000", area: "Parking Lot", prefix: "rampcnn_parking_lot_2019_04_09_pms2000" },
+  { name: "MLMS001", area: "Campus Road", prefix: "rampcnn_campus_road_2019_04_30_mlms001" },
+] as const;
+
+const filenameFor = (prefix: string, suffix: string) => prefix + suffix + ".mp4";
+const videoFor = (name: string): string | undefined => assets["../assets/videos/sim2real/" + name];
 ---
 
-<div class="my-6 grid gap-x-4 gap-y-6 md:grid-cols-3">
-  <div>
-    <p class="mb-2 text-center font-medium">Camera</p>
-    <Video src={bmsCam} />
-    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">BMS1000</p>
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Real Radar</p>
-    <Video src={bmsReal} />
-    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">BMS1000</p>
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Sim Radar</p>
-    <Video src={bmsSim} />
-    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">BMS1000</p>
-  </div>
-
-  <div>
-    <p class="mb-2 text-center font-medium">Camera</p>
-    <Video src={pmsCam} />
-    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">PMS2000</p>
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Real Radar</p>
-    <Video src={pmsReal} />
-    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">PMS2000</p>
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Sim Radar</p>
-    <Video src={pmsSim} />
-    <p class="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">PMS2000</p>
+<div class="not-prose my-6 overflow-x-auto">
+  <div class="min-w-[960px] space-y-5">
+    <div class="grid grid-cols-[2.75rem_repeat(4,minmax(0,1fr))] gap-x-3">
+      <div aria-hidden="true"></div>
+      {columns.map((column) => (
+        <p class="mb-0 text-center text-sm font-semibold text-zinc-800 dark:text-zinc-100">{column.name}</p>
+      ))}
+    </div>
+    {scenes.map((scene) => (
+      <div class="grid grid-cols-[2.75rem_repeat(4,minmax(0,1fr))] items-center gap-x-3">
+        <div class="flex h-full items-center justify-center">
+          <span class="whitespace-nowrap text-xs font-semibold text-zinc-700 [writing-mode:vertical-rl] rotate-180 dark:text-zinc-200">
+            {scene.area} | {scene.name}
+          </span>
+        </div>
+        {columns.map((column) => {
+          const filename = filenameFor(scene.prefix, column.suffix);
+          const src = videoFor(filename);
+          return (
+            <div class="min-w-0">
+              {src ? (
+                <Video src={src} preload="metadata" />
+              ) : (
+                <div class="flex aspect-[17/10] w-full flex-col items-center justify-center rounded-lg border border-dashed border-zinc-300 bg-zinc-100 px-2 py-3 text-center dark:border-zinc-700 dark:bg-zinc-900">
+                  <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">Awaiting video upload</p>
+                  <code class="mt-2 max-w-full break-all text-[10px] text-zinc-400 dark:text-zinc-500">{filename}</code>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    ))}
   </div>
 </div>
