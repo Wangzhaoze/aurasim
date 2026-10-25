@@ -50,8 +50,6 @@ import dtReal2 from "./assets/comparisons/dt_real_2.png";
 import dtSim2 from "./assets/comparisons/dt_sim_2.png";
 import dtReal3 from "./assets/comparisons/dt_real_3.png";
 import dtSim3 from "./assets/comparisons/dt_sim_3.png";
-import dtReal4 from "./assets/comparisons/dt_real_4.png";
-import dtSim4 from "./assets/comparisons/dt_sim_4.png";
 
 <Header
   title="AuRaSim: A Ray-Tracing-Based Automotive Radar Simulator for Dynamic Digital-Twin Scenarios"
@@ -62,7 +60,6 @@ import dtSim4 from "./assets/comparisons/dt_sim_4.png";
     { name: "Tai Fei", url: "https://example.com", notes: ["2"] },
     { name: "Christopher Grimm", url: "https://example.com", notes: ["1"] },
     { name: "Yi Jin", url: "https://example.com", notes: ["1"] },
-    { name: "Ernst Warsitz", url: "https://example.com", notes: ["1"] },
     { name: "Claas Tebruegge", url: "https://example.com", notes: ["1"] },
     { name: "Markus Gardill", url: "https://example.com", notes: ["3"] },
   ]}
@@ -86,42 +83,13 @@ import dtSim4 from "./assets/comparisons/dt_sim_4.png";
 
 ## Abstract
 
-This is a template you can use to create a professional-looking, accessible, and performant project page for your research paper. [See the code for the template and instructions on how to use it yourself on GitHub](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+Modern simulators can generate synthetic camera and LiDAR data with accurate annotations for downstream tasks. In contrast, automotive radar simulation remains less mature because it requires not only a 3D engine to model dynamic objects in the scenes but also electromagnetic material properties, antenna configurations, wave propagation mechanisms, and coherent signal synthesis. Existing frameworks are either proprietary or overly simplified, limiting the scalability of radar raw measurements. This paper presents AuRaSim, a ray-tracing-based automotive frequency-modulated continuous wave (FMCW) radar simulation framework for dynamic scenarios. Rather than implementing all components from scratch, AuRaSim builds on Blender for efficient dynamic-scene construction and Sionna RT for graphics processing unit (GPU) accelerated electromagnetic ray tracing, while introducing radar-specific adaptations for path-resolved propagation with complex coefficients, motion-aware Doppler modeling, and subsequently coherent multi-channel analog-to-digital converter (ADC) cube synthesis based on waveform configurations. Quantitative comparison between simulated and measured range–Doppler maps in digital-twin scenarios achieves a root-mean-square error (RMSE) of 0.147 and a peak signal-to-noise ratio (PSNR) of 16.93 dB, demonstrating the accuracy and fidelity of the synthetic signal. AuRaSim therefore provides a complete and extensible platform for reproducible automotive radar simulation and research.
+
+Project homepage: [https://wangzhaoze.github.io/aurasim/](https://wangzhaoze.github.io/aurasim/).
 
 </HighlightedSection>
 
-## Demonstrations
-
-### Digital Twin Scenarios
-
-<div class="grid gap-5 md:grid-cols-2">
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal1} alt="Real scene for digital twin comparison 1" />
-      <Picture slot="itemTwo" src={dtSim1} alt="Simulated digital twin scene 1" />
-    </Comparison>
-  </div>
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal2} alt="Real scene for digital twin comparison 2" />
-      <Picture slot="itemTwo" src={dtSim2} alt="Simulated digital twin scene 2" />
-    </Comparison>
-  </div>
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal3} alt="Real scene for digital twin comparison 3" />
-      <Picture slot="itemTwo" src={dtSim3} alt="Simulated digital twin scene 3" />
-    </Comparison>
-  </div>
-  <div>
-    <Comparison client:idle>
-      <Picture slot="itemOne" src={dtReal4} alt="Real scene for digital twin comparison 4" />
-      <Picture slot="itemTwo" src={dtSim4} alt="Simulated digital twin scene 4" />
-    </Comparison>
-  </div>
-</div>
-
-### Ray-Tracing
+## Ray-Tracing
 
 <div class="not-prose my-8">
   <ModelViewer src="/aurasim/demo_ray_tracing_1.glb" alt="Interactive AuRaSim ray-tracing scene" />
@@ -135,70 +103,39 @@ Use the `Picture` component to display images. If you have a figure in PDF forma
 <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
 */}
 
-### Video
+## Sim2Real
 
-#### Parking Lot — Pedestrian Approaching
+### Digital Twin Scenarios
 
-<div class="grid gap-4 md:grid-cols-3">
-  <div>
-    <p class="mb-2 text-center font-medium">Scenario</p>
-    <Video src={pedestriansScenario} />
+<div class="grid gap-5 lg:grid-cols-3">
+  <div class="min-w-0">
+    <p class="mb-2 text-center font-semibold">BMS1000</p>
+    <Comparison client:idle>
+      <Picture slot="itemOne" src={dtReal1} alt="BMS1000 real camera" />
+      <Picture slot="itemTwo" src={dtSim1} alt="BMS1000 simulated camera" />
+    </Comparison>
   </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
-    <Video src={pedestriansRdmap} />
+  <div class="min-w-0">
+    <p class="mb-2 text-center font-semibold">PMS2000</p>
+    <Comparison client:idle>
+      <Picture slot="itemOne" src={dtReal2} alt="PMS2000 real camera" />
+      <Picture slot="itemTwo" src={dtSim2} alt="PMS2000 simulated camera" />
+    </Comparison>
   </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
-    <Video src={pedestriansMicroDoppler} />
-  </div>
-</div>
-
-#### Parking Lot — Car Approaching
-
-<div class="grid gap-4 md:grid-cols-3">
-  <div>
-    <p class="mb-2 text-center font-medium">Scenario</p>
-    <Video src={carsScenario} />
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
-    <Video src={carsRdmap} />
-  </div>
-  <div>
-    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
-    <Video src={carsMicroDoppler} />
+  <div class="min-w-0">
+    <p class="mb-2 text-center font-semibold">MLMS001</p>
+    <Comparison client:idle>
+      <Picture slot="itemOne" src={dtReal3} alt="MLMS001 real camera" />
+      <Picture slot="itemTwo" src={dtSim3} alt="MLMS001 simulated camera" />
+    </Comparison>
   </div>
 </div>
 
-{/*
-### Wide visual
-
-I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
-
-<Wide>
-  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-</Wide>
-*/}
-
-{/*
-### Figure with caption
-
-Wrap a visual in the `Figure` component to add a caption.
-
-<Figure>
-  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
-  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
-</Figure>
-*/}
-
-### Sim2Real
-
-#### RAMP-CNN Digital Twin
+### Qualitative Comparison
 
 <RampCnnDigitalTwin />
 
-## Quantitative Comparison
+### Quantitative Comparison
 
 <div class="not-prose my-6 overflow-x-auto">
   <div class="mx-auto max-w-3xl">
@@ -263,6 +200,63 @@ Wrap a visual in the `Figure` component to add a caption.
     </table>
   </div>
 </div>
+
+## Video Demonstrations
+
+#### Parking Lot — Pedestrian Approaching
+
+<div class="grid gap-4 md:grid-cols-3">
+  <div>
+    <p class="mb-2 text-center font-medium">Scenario</p>
+    <Video src={pedestriansScenario} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
+    <Video src={pedestriansRdmap} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
+    <Video src={pedestriansMicroDoppler} />
+  </div>
+</div>
+
+#### Parking Lot — Car Approaching
+
+<div class="grid gap-4 md:grid-cols-3">
+  <div>
+    <p class="mb-2 text-center font-medium">Scenario</p>
+    <Video src={carsScenario} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Range-Doppler Map</p>
+    <Video src={carsRdmap} />
+  </div>
+  <div>
+    <p class="mb-2 text-center font-medium">Micro-Doppler</p>
+    <Video src={carsMicroDoppler} />
+  </div>
+</div>
+
+{/*
+### Wide visual
+
+I constrained the maximum width of the text column to make sure it's readable even when the screen is wide. But images and other visuals should "break out" and take up more horizontal space: for this, try wrapping them in the `Wide` component.
+
+<Wide>
+  <Picture src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+</Wide>
+*/}
+
+{/*
+### Figure with caption
+
+Wrap a visual in the `Figure` component to add a caption.
+
+<Figure>
+  <Picture slot="figure" src={dogsDiffc} alt="Photo of two running dogs, lossily compressed using the DiffC algorithm" />
+  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
+</Figure>
+*/}
 
 ## Bibliography
 
