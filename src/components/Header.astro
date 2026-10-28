@@ -14,9 +14,10 @@ type Note = {
 };
 
 type Link = {
-  url: string;
+  url?: string;
   name: string;
   icon?: string;
+  disabled?: boolean;
 };
 
 interface Props {
@@ -77,12 +78,23 @@ const hasTitleSlot = Astro.slots.has("title");
     )}
     {links && (
       <div class="not-prose flex flex-row flex-wrap justify-center gap-2">
-        {links.map((link) => (
-          <a href={link.url} class:list={["flex flex-row items-center gap-2 rounded-full px-5 py-2 text-lg hover:no-underline", hasBackground ? "bg-white hover:bg-zinc-200 text-zinc-800 text-shadow-none shadow-[0_0_8px_rgba(0,0,0,0.6)]" : "bg-zinc-800 text-white hover:bg-black dark:text-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-200"]}>
-            {link.icon && <Icon name={link.icon} />}
-            <span>{link.name}</span>
-          </a>
-        ))}
+        {links.map((link) =>
+          link.disabled || !link.url ? (
+            <span
+              aria-disabled="true"
+              title="Not uploaded yet"
+              class="flex cursor-not-allowed items-center gap-2 rounded-full bg-zinc-200 px-5 py-2 text-lg text-zinc-500 opacity-75 shadow-none text-shadow-none dark:bg-zinc-700 dark:text-zinc-300"
+            >
+              {link.icon && <Icon name={link.icon} />}
+              <span>{link.name}</span>
+            </span>
+          ) : (
+            <a href={link.url} class:list={["flex flex-row items-center gap-2 rounded-full px-5 py-2 text-lg hover:no-underline", hasBackground ? "bg-white hover:bg-zinc-200 text-zinc-800 text-shadow-none shadow-[0_0_8px_rgba(0,0,0,0.6)]" : "bg-zinc-800 text-white hover:bg-black dark:text-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-200"]}>
+              {link.icon && <Icon name={link.icon} />}
+              <span>{link.name}</span>
+            </a>
+          )
+        )}
       </div>
     )}
   </div>
