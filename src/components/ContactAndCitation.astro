@@ -1,0 +1,122 @@
+---
+const bibtex = [
+  "@misc{aurasim,",
+  "  title={AuRaSim: A Ray-Tracing Based Automotive FMCW Radar Simulator for Dynamic Scenarios},",
+  "  author={Zhaoze Wang and Changxu Zhang and Tai Fei and Christopher Grimm and Yi Jin and Claas Tebruegge and Markus Gardill},",
+  "  year={2026},",
+  "  eprint={2610.37403},",
+  "  archivePrefix={arXiv},",
+  "  primaryClass={cs.RO},",
+  "  url={https://arxiv.org/abs/2610.37403},",
+  "}",
+].join("\n");
+---
+
+<section id="contact" class="not-prose my-14 scroll-mt-20" aria-labelledby="aurasim-contact-heading">
+  <h2 id="aurasim-contact-heading" class="mb-4 text-3xl font-semibold text-zinc-900 dark:text-zinc-100">Contact</h2>
+  <div class="grid gap-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-700 dark:bg-zinc-800/40 md:grid-cols-2 md:p-8">
+    <div>
+      <h3 class="mt-0 mb-3 text-xl font-semibold text-zinc-900 dark:text-zinc-100">Let's talk</h3>
+      <p class="mb-7 text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
+        Have a question about AuRaSim, a research idea, or a collaboration proposal? Send me a message.
+      </p>
+      <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Direct contact</p>
+      <a class="break-all text-base font-medium text-blue-700 underline decoration-dashed underline-offset-4 hover:decoration-solid dark:text-blue-300" href="mailto:wangzhaoze@outlook.com">wangzhaoze@outlook.com</a>
+      <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Click to open your email client.</p>
+    </div>
+    <form id="aurasim-contact-form" class="flex min-w-0 flex-col gap-4" novalidate>
+      <div>
+        <label for="aurasim-contact-name" class="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-200">Your Name *</label>
+        <input id="aurasim-contact-name" name="name" type="text" autocomplete="name" required placeholder="Your name" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-blue-600 focus:ring-blue-600 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100" />
+      </div>
+      <div>
+        <label for="aurasim-contact-email" class="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-200">Your Email *</label>
+        <input id="aurasim-contact-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-blue-600 focus:ring-blue-600 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100" />
+      </div>
+      <div>
+        <label for="aurasim-contact-message" class="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-200">Message *</label>
+        <textarea id="aurasim-contact-message" name="message" rows="4" minlength="5" required placeholder="Write your message here..." class="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2.5 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-blue-600 focus:ring-blue-600 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100"></textarea>
+      </div>
+      <button type="submit" class="self-start rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300">Send message →</button>
+      <p id="aurasim-contact-status" class="min-h-5 text-sm text-zinc-600 dark:text-zinc-300" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section id="cite" class="not-prose my-14 scroll-mt-20" aria-labelledby="aurasim-cite-heading">
+  <h2 id="aurasim-cite-heading" class="mb-3 text-3xl font-semibold text-zinc-900 dark:text-zinc-100">Cite AuRaSim</h2>
+  <p class="mb-5 text-base leading-relaxed text-zinc-600 dark:text-zinc-300">
+    If you use AuRaSim in your research, please cite our <a href="https://arxiv.org/abs/2610.37403" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline dark:text-blue-300">paper on arXiv</a>.
+  </p>
+  <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40">
+    <div class="flex items-center justify-between gap-3 border-b border-zinc-200 px-4 py-3 dark:border-zinc-700">
+      <span class="text-sm font-semibold text-zinc-700 dark:text-zinc-200">BibTeX</span>
+      <button id="aurasim-copy-bibtex" type="button" class="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-700" aria-label="Copy AuRaSim BibTeX citation">Copy BibTeX</button>
+    </div>
+    <pre class="m-0 overflow-x-auto p-4 text-sm leading-relaxed text-zinc-800 dark:text-zinc-100"><code id="aurasim-bibtex">{bibtex}</code></pre>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#aurasim-contact-form");
+  const status = document.querySelector<HTMLElement>("#aurasim-contact-status");
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const setStatus = (message: string, isError = false) => {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("text-red-600", isError);
+    status.classList.toggle("dark:text-red-400", isError);
+  };
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const name = (document.querySelector<HTMLInputElement>("#aurasim-contact-name")?.value || "").trim();
+    const emailInput = document.querySelector<HTMLInputElement>("#aurasim-contact-email");
+    const email = (emailInput?.value || "").trim();
+    const message = (document.querySelector<HTMLTextAreaElement>("#aurasim-contact-message")?.value || "").trim();
+    if (!name || !emailInput?.checkValidity() || !email || message.length < 5) {
+      setStatus("Please enter your name, a valid email address, and a message of at least 5 characters.", true);
+      return;
+    }
+
+    if (submitButton) submitButton.disabled = true;
+    setStatus("Sending...");
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/wangzhaoze@outlook.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: "AuRaSim website message from " + name,
+          _template: "table",
+          _url: window.location.href,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.success === false || data.success === "false") {
+        throw new Error(data.message || "Unable to send message");
+      }
+      form.reset();
+      setStatus("Message sent. Thank you — I'll get back to you soon.");
+    } catch (error) {
+      console.error("AuRaSim contact form submission failed:", error);
+      setStatus("Could not send automatically. Please email wangzhaoze@outlook.com directly.", true);
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
+  });
+
+  const copyButton = document.querySelector<HTMLButtonElement>("#aurasim-copy-bibtex");
+  copyButton?.addEventListener("click", async () => {
+    const content = document.getElementById("aurasim-bibtex")?.textContent || "";
+    try {
+      await navigator.clipboard.writeText(content);
+      copyButton.textContent = "Copied!";
+      window.setTimeout(() => { copyButton.textContent = "Copy BibTeX"; }, 2000);
+    } catch {
+      copyButton.textContent = "Select text to copy";
+    }
+  });
+</script>
